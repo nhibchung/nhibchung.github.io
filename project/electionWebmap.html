@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+ <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/navbar-webmap.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+<meta charset=utf-8 />
+<title>Tweeting the 2016 Election</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #description {padding:10px;color:#F0F0F0;font-family:kaiti;text-align:left;}
+</style>
+</head>
+<body>
+
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+			<p id="description">
+				<font size="4.5"><strong>Author</strong>: Nhi Chung</font><br><br>
+				<strong>Email</strong>: nhibchung at gmail.com<br><br>
+				<strong>Map Features</strong>:1 heatmap layer and 6 tweet marker layers; click marker to show candidate's  picture, name, and tweet content; 1 custom basemap and 1 mapbox dark basemap <br>
+				(Note: turn off heat map to ensure marker features work)<br><br>
+				<strong>Description</strong>:<br>
+				- Map of tweets about candidates for the 2016 Elections<br><br>
+				- Simple election heatmap layer created from Twitter data collected over 4 weeks<br><br>
+				- Six layers of tweet markers with sentiment analysis(done using Stanford NLP API) for the top 6 candidates. Darker shade of marker color indicates negative tweet sentiment and lighter shade for non-negative.
+			</p>
+		</ul>
+    </nav>
+
+
+
+
+<!--//////// Imports ////////
+	////////////////////////--->
+<script src='./electionWebmapPhotoJson/leaflet.ajax.min.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.3/leaflet-heat.js'></script>
+
+<div id='map'></div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiYnJhZGx5MTIzIiwiYSI6ImpfZldDRmcifQ.xOQ9uBVhXyHl-457TR9UkQ';
+
+//////// BaseMaps ////////
+////////////////////////
+var map = L.mapbox.map('map', '', {
+		center: new L.LatLng(38.877742, -97.380979),
+		zoom: 4,
+		zoomControl:false});
+
+new L.Control.Zoom({position: 'topright' }).addTo(map);
+		
+var customMapboxLayer = L.tileLayer('https://{s}.tiles.mapbox.com/v4/nhibchung.282be4b5/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYnJhZGx5MTIzIiwiYSI6ImpfZldDRmcifQ.xOQ9uBVhXyHl-457TR9UkQ').addTo(map);
+    
+//////// HeatMap ////////
+////////////////////////
+var heat = L.heatLayer([], { maxZoom: 12 }).addTo(map);
+
+//imports GeoJSON for top six candidates	
+var layer = L.mapbox.featureLayer('https://dl.dropboxusercontent.com/s/tvmw48i4vqvms6y/allStatesForTopSix.geojson?dl=0').on('ready', function() {
+    // Zoom the map to the bounds of the markers.
+    //map.fitBounds(layer.getBounds());
+    // Add each marker point to the heatmap.
+    layer.eachLayer(function(tweet) {
+        heat.addLatLng(tweet.getLatLng());
+    });
+});
+
+//////// Circle Markers ////////
+///////////////////////////////
+		var coloredCircle1 = {
+		radius: 7,
+		fillColor: "#FF1500 ",
+		color: "#FFFFF0",
+		weight: 3,
+		opacity: 1,
+		fillOpacity: 0.9
+		};
+		var coloredCircle2 = {
+		radius: 7,
+		fillColor: "#3399FF",
+		color: "#FFFFF0",
+		weight: 3,
+		opacity: 1,
+		fillOpacity: 0.8
+		};
+		
+		var Circle1NegativeSentimentRep = {
+		radius: 7,
+		fillColor: "#980000 ",
+		color: "#FFFFF0",
+		weight: 3,
+		opacity: 1,
+		fillOpacity: 0.8
+		};
+		var Circle2NegativeSentimentDem = {
+		radius: 7,
+		fillColor: "#000070",
+		color: "#FFFFF0",
+		weight: 3,
+		opacity: 1,
+		fillOpacity: 0.8
+		};
+
+/////// GeoJSON Features ///////
+///////////////////////////////
+	var jebBushLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/jebBush.json"
+						,{onEachFeature: onEachElectionFeature
+						,pointToLayer: function(feature, latlng){
+						var circle = coloredCircle1;
+						if(feature.properties.score < 0){
+							circle = Circle1NegativeSentimentRep;
+						}
+						return L.circleMarker(latlng, circle)}});
+
+	var benCarsonLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/benCarson.json"
+						,{onEachFeature: onEachElectionFeature
+						,pointToLayer: function(feature, latlng){
+						var circle = coloredCircle1;
+						if(feature.properties.score < 0){
+							circle = Circle1NegativeSentimentRep;
+						}
+						return L.circleMarker(latlng, circle)}});
+						
+	var bernieSandersLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/bernieSanders.json"
+						,{onEachFeature: onEachElectionFeature
+						,pointToLayer: function(feature, latlng){
+						var circle = coloredCircle2;
+						if(feature.properties.score < 0){
+							circle = Circle2NegativeSentimentDem;
+						}
+						return L.circleMarker(latlng, circle)}});
+	
+	var hillaryClintonLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/hillaryClinton.json"
+						,{onEachFeature: onEachElectionFeature
+						,pointToLayer: function(feature, latlng){
+						var circle = coloredCircle2;
+						if(feature.properties.score < 0){
+							circle = Circle2NegativeSentimentDem;
+						}
+						return L.circleMarker(latlng, circle)}});
+	var randPaulLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/randPaul.json"
+						,{onEachFeature: onEachElectionFeature
+						,pointToLayer: function(feature, latlng){
+						var circle = coloredCircle1;
+						if(feature.properties.score < 0){
+							circle = Circle1NegativeSentimentRep;
+						}
+						return L.circleMarker(latlng, circle)}});
+						
+	var tedCruzLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/tedCruz.json"
+						,{onEachFeature: onEachElectionFeature
+						,pointToLayer: function(feature, latlng){
+						var circle = coloredCircle1;
+						if(feature.properties.score < 0){
+							circle = Circle1NegativeSentimentRep;
+						}
+						return L.circleMarker(latlng, circle)}});				
+
+/////// Marker OnClick ///////
+/////////////////////////////						
+function onEachElectionFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+		if (feature.properties && feature.properties.name) {
+			if(feature.properties.name == "ben carson"){
+				return layer.bindPopup("<p style= 'text-align:center'>" 
+							+"<img src='https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/benCarson.jpeg' height= '120' width='120' /><br/>"
+							+"<br/>"+"<strong>Republican Candidate: </strong>" + feature.properties.name+"<br/>"
+							+"<br/>"+"<strong>Tweet content: </strong>" + feature.properties.text+"<br/>" 
+							+"</p>");
+			}
+			if(feature.properties.name == "bernie sanders"){
+				return layer.bindPopup("<p style= 'text-align:center'>" 
+							+"<img src='https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/bernieSanders.jpg' height= '120' width='120' /><br/>"
+							+"<br/>"+"<strong>Democrat Candidate: </strong>" + feature.properties.name+"<br/>"
+							+"<br/>"+"<strong>Tweet content: </strong>" + feature.properties.text+"<br/>" 
+							+"</p>");
+			}
+			if(feature.properties.name == "hillary clinton"){
+				return layer.bindPopup("<p style= 'text-align:center'>" 
+							+"<img src='https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/hillaryClinton.jpg' height= '120' width='120' /><br/>"
+							+"<br/>"+"<strong>Democrat Candidate: </strong>" + feature.properties.name+"<br/>"
+							+"<br/>"+"<strong>Tweet content: </strong>" + feature.properties.text+"<br/>" 
+							+"</p>");
+			}
+			if(feature.properties.name == "jeb bush"){
+				return layer.bindPopup("<p style= 'text-align:center'>" 
+							+"<img src='https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/jebBush.jpg' height= '120' width='120' /><br/>"
+							+"<br/>"+"<strong>Republican Candidate: </strong>" + feature.properties.name+"<br/>"
+							+"<br/>"+"<strong>Tweet content: </strong>" + feature.properties.text+"<br/>" 
+							+"</p>");
+			}
+			if(feature.properties.name == "rand paul"){
+				return layer.bindPopup("<p style= 'text-align:center'>" 
+							+"<img src='https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/randPaul.jpeg' height= '120' width='120' /><br/>"
+							+"<br/>"+"<strong>Republican Candidate: </strong>" + feature.properties.name+"<br/>"
+							+"<br/>"+"<strong>Tweet content: </strong>" + feature.properties.text+"<br/>" 
+							+"</p>");
+			}
+			if(feature.properties.name == "ted cruz"){
+				return layer.bindPopup("<p style= 'text-align:center'>" 
+							+"<img src='https://raw.githubusercontent.com/nhibchung/nhibchung.github.io/master/project/electionWebmapPhotoJson/tedCruz.jpg' height= '120' width='120' /><br/>"
+							+"<br/>"+"<strong>Republican Candidate: </strong>" + feature.properties.name+"<br/>"
+							+"<br/>"+"<strong>Tweet content: </strong>" + feature.properties.text+"<br/>" 
+							+"</p>");
+			}
+		}
+	}	
+						
+/////// Layer Control ///////
+////////////////////////////						
+	var basegroup= {
+		"Dark Basemap" : L.mapbox.tileLayer('mapbox.dark'),
+		"Light Basemap" : customMapboxLayer};
+	
+	var overlays = { 
+		"Ben Carson": benCarsonLayer,
+		"Bernie Sanders": bernieSandersLayer,
+		"Hillary Clinton": hillaryClintonLayer,
+		"Jeb Bush": jebBushLayer,
+		"Rand Paul": randPaulLayer,
+		"Ted Cruz":tedCruzLayer,
+		"Heat Map":heat
+	};
+		
+	L.control.layers(basegroup, overlays).addTo(map);						
+
+</script>
+
+
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    </script>
+
+
+
+</body>
+</html>
