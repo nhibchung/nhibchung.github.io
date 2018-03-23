@@ -184,7 +184,17 @@ hr.small {
     background-size: cover;
     -o-background-size: cover;
 }
-
+.moleheader-header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 87%;
+    background: url(../img/pokeAMole/moleheader.jpg) no-repeat top center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
 /* About */
 
 .about {
