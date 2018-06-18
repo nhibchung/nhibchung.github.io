@@ -195,6 +195,17 @@ hr.small {
     background-size: cover;
     -o-background-size: cover;
 }
+.heliheader-header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 87%;
+    background: url(../img/heliVR/heliheader.jpg) no-repeat top center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
 /* About */
 
 .about {
