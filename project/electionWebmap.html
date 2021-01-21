@@ -18,6 +18,8 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 <style>
   body { margin:0; padding:0; }
   #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -56,19 +58,29 @@
 <div id='map'></div>
 
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiYnJhZGx5MTIzIiwiYSI6ImpfZldDRmcifQ.xOQ9uBVhXyHl-457TR9UkQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoibmhpYmNodW5nIiwiYSI6ImNrZ3ZocW9qYTAwajEydnFybndlNHU1NWEifQ.hZE0vL9O6_ioN3dwMxmawA';
 
 //////// BaseMaps ////////
 ////////////////////////
+var map = new mapboxgl.Map({
+	container: 'map',
+	style: 'mapbox://styles/mapbox/dark-v10',
+	zoom: 4,
+	center: [-97.380979,38.877742]
+});
+//new mapboxgl.zoom({position: 'topright' }).addTo(map);
+
+/*
 var map = L.mapbox.map('map', '', {
 		center: new L.LatLng(38.877742, -97.380979),
 		zoom: 4,
 		zoomControl:false});
+		*/
 
-new L.Control.Zoom({position: 'topright' }).addTo(map);
-		
-var customMapboxLayer = L.tileLayer('https://{s}.tiles.mapbox.com/v4/nhibchung.282be4b5/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYnJhZGx5MTIzIiwiYSI6ImpfZldDRmcifQ.xOQ9uBVhXyHl-457TR9UkQ').addTo(map);
-    
+//new L.Control.Zoom({position: 'topright' }).addTo(map);
+	/*	
+var customMapboxLayer = L.tileLayer('mapbox://styles/mapbox/light-v10?access_token=pk.eyJ1IjoibmhpYmNodW5nIiwiYSI6ImNrZ3ZocW9qYTAwajEydnFybndlNHU1NWEifQ.hZE0vL9O6_ioN3dwMxmawA').addTo(map);
+    */
 //////// HeatMap ////////
 ////////////////////////
 var heat = L.heatLayer([], { maxZoom: 12 }).addTo(map);
@@ -227,8 +239,10 @@ function onEachElectionFeature(feature, layer) {
 /////// Layer Control ///////
 ////////////////////////////						
 	var basegroup= {
-		"Dark Basemap" : L.mapbox.tileLayer('mapbox.dark'),
-		"Light Basemap" : customMapboxLayer};
+		"Dark Basemap" : L.mapbox.tileLayer('mapbox.dark')
+		//,
+		//"Light Basemap" : customMapboxLayer
+		};
 	
 	var overlays = { 
 		"Ben Carson": benCarsonLayer,
