@@ -11,28 +11,22 @@
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json", {onProgress: UnityProgress});
     </script>
-	
-    <!-- About -->
-    <section id="about" class="about">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<h2>Matching Cards game</h2>
-					<p class="lead" >
-					- A simple card game created with Unity for WebGL that can be played in a web browser.<br>
-					- This project was for me to learn more about using design patterns in Unity.<br>
-					- Check out the project on my <a href="https://github.com/nhibchung/Projects/tree/master/Matching%20Cards%20Game" target="blank">Github page</a>. A Unity packpage is also available for download.
-					</p>
-				</div>
-			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /.container -->
-    </section>
-	
   </head>
   <body>
     <div class="webgl-content">
+		<div class="header">
+
+				<h2>Matching Cards game</h2>
+				<p class="lead" >
+				- A simple card game created with Unity WebGL that can be played in a browser.
+				<br>
+				- This project was for me to learn more about using design patterns in Unity.
+				<br>
+				- Check out the project on my <a href="https://github.com/nhibchung/Projects/tree/master/Matching%20Cards%20Game" target="blank">Github</a> page.<br>
+				</p>
+
+		</div>
+	
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
         <div class="webgl-logo"></div>
