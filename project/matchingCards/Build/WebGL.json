@@ -1,6 +1,6 @@
 {
-"companyName": "DefaultCompany",
-"productName": "MatchingCardGame",
+"companyName": "NhiChung",
+"productName": "MatchingCardsGame",
 "productVersion": "0.1",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
