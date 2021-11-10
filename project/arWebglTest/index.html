@@ -66,6 +66,13 @@
 				//}, undefined, function ( error ) {
 				//	console.error( error );
 				//} );
+				
+				loader.load('./assets/LittlestTokyo.glb', function ( gltf ) {
+					model.scale.set(0.2,0.2,0.2);
+					scene.add( gltf.scene );
+				}, undefined, function ( error ) {
+					console.error( error );
+				} );
 
 				function onSelect() {
 
@@ -84,12 +91,12 @@
 						//animate();
 						//});
 						
-						loader.load('./assets/LittlestTokyo.glb', function ( gltf ) {
-							model.scale.set(0.2,0.2,0.2);
-							scene.add( gltf.scene );
-						}, undefined, function ( error ) {
-							console.error( error );
-						} );
+						//loader.load('./assets/LittlestTokyo.glb', function ( gltf ) {
+						//	model.scale.set(0.2,0.2,0.2);
+						//	scene.add( gltf.scene );
+						//}, undefined, function ( error ) {
+						//	console.error( error );
+						//} );
 					}
 
 				}
