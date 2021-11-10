@@ -9,7 +9,9 @@
 	<body>
 
 		<div id="info">
-			<a href="https://www.havik.us/" target="_blank" rel="noopener">HAVIK</a> WebAR Cube Test<br/>(use Chrome Android version 81+)
+			<a href="https://www.havik.us/" target="_blank" rel="noopener">HAVIK</a> WebAR Cube Test<br/><br/>
+			- Android device: click START AR button to view the experience. Note: if AR is not enabled on your phone, please download <a href="https://play.google.com/store/apps/details?id=com.google.ar.core&hl=en_US&gl=US" target="_blank" rel="noopener">Google Play Services for AR app</a><br/>
+			- iOS device: please download <a href="https://apps.apple.com/us/app/webxr-viewer/id1295998056" target="_blank" rel="noopener">WebXR Viewer</a>  from the app store and use it to scan the QR code to view the AR experience
 		</div>
 
 		<script type="module">
@@ -56,18 +58,25 @@
 
 				//
 
-				const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
+				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
+				const loader = new GLTFLoader();
 
 				function onSelect() {
 
 					if ( reticle.visible ) {
 
-						const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-						const mesh = new THREE.Mesh( geometry, material );
-						mesh.position.setFromMatrixPosition( reticle.matrix );
-						mesh.scale.y = Math.random() * 2 + 1;
-						scene.add( mesh );
-
+						//const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+						//const mesh = new THREE.Mesh( geometry, material );
+						//mesh.position.setFromMatrixPosition( reticle.matrix );
+						//mesh.scale.y = Math.random() * 2 + 1;
+						//scene.add( mesh );
+						
+						loader.load('m1a1.gltf', function(gltf){
+						  model = gltf.scene.children[0];
+						  model.scale.set(0.1,0.1,0.1);
+						  scene.add(gltf.scene);
+						  animate();
+						});
 					}
 
 				}
