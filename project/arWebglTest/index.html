@@ -72,9 +72,9 @@
 						//mesh.scale.y = Math.random() * 2 + 1;
 						//scene.add( mesh );
 						
-						loader.load('m1a1.gltf', function(gltf){
+						loader.load('/assets/m1a1.gltf', function(gltf){
 						model = gltf.scene.children[0];
-						model.scale.set(0.1,0.1,0.1);
+						model.scale.set(0.5,0.5,0.5);
 						scene.add(gltf.scene);
 						animate();
 						});
