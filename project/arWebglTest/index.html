@@ -61,7 +61,7 @@
 
 				const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
-				loader.load('/assets/m1a1.gltf', function ( gltf ) {
+				loader.load('./assets/m1a1.gltf', function ( gltf ) {
 					scene.add( gltf.scene );
 				}, undefined, function ( error ) {
 					console.error( error );
@@ -77,7 +77,7 @@
 						mesh.scale.y = Math.random() * 2 + 1;
 						scene.add( mesh );
 						
-						//loader.load('/assets/m1a1.gltf', function(gltf){
+						//loader.load('./assets/m1a1.gltf', function(gltf){
 						//model = gltf.scene.children[0];
 						//model.scale.set(0.5,0.5,0.5);
 						//scene.add(gltf.scene);
