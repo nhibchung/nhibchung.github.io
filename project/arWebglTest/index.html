@@ -59,23 +59,23 @@
 
 				//
 
-				const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
+				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
-				loader.load('./assets/m1a1.gltf', function ( gltf ) {
-					scene.add( gltf.scene );
-				}, undefined, function ( error ) {
-					console.error( error );
-				} );
+				//loader.load('./assets/m1a1.gltf', function ( gltf ) {
+				//	scene.add( gltf.scene );
+				//}, undefined, function ( error ) {
+				//	console.error( error );
+				//} );
 
 				function onSelect() {
 
 					if ( reticle.visible ) {
 
-						const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-						const mesh = new THREE.Mesh( geometry, material );
-						mesh.position.setFromMatrixPosition( reticle.matrix );
-						mesh.scale.y = Math.random() * 2 + 1;
-						scene.add( mesh );
+						//const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+						//const mesh = new THREE.Mesh( geometry, material );
+						//mesh.position.setFromMatrixPosition( reticle.matrix );
+						//mesh.scale.y = Math.random() * 2 + 1;
+						//scene.add( mesh );
 						
 						//loader.load('./assets/m1a1.gltf', function(gltf){
 						//model = gltf.scene.children[0];
@@ -83,6 +83,13 @@
 						//scene.add(gltf.scene);
 						//animate();
 						//});
+						
+						loader.load('./assets/LittlestTokyo.glb', function ( gltf ) {
+							model.scale.set(0.2,0.2,0.2);
+							scene.add( gltf.scene );
+						}, undefined, function ( error ) {
+							console.error( error );
+						} );
 					}
 
 				}
