@@ -97,7 +97,7 @@
 						//mesh.scale.y = Math.random() * 2 + 1;
 						//scene.add( mesh );
 						
-						loader.load('./assets/m1a1.gltf', function ( gltf ) {
+						loader.load('./assets/Soldier.glb', function ( gltf ) {
 							//gltf.scene.traverse( function ( child ) {
 							//	if ( child.isMesh ) {
 							//		child.geometry.center(); // center here
@@ -107,7 +107,7 @@
 							//position.setFromMatrixPosition( reticle.matrix );
 							//gltf.scene.scale.multiplyScalar(1 / 100);
 							var object = gltf.scene.children[0];
-							object.scale.set(0.100,0.100,0.100);
+							object.scale.set(0.500,0.500,0.500);
 							object.position.setFromMatrixPosition( reticle.matrix );
 							scene.add( object );
 						}, undefined, function ( error ) {
