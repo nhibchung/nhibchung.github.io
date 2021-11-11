@@ -103,11 +103,12 @@
 							//		child.geometry.center(); // center here
 							//	}
 							//});
-							gltf.scene.scale.set(0.1,0.1,0.1) // scale here
+							//gltf.scene.scale.set(0.1,0.1,0.1) // scale here
+							position.setFromMatrixPosition( reticle.matrix );
 							//gltf.scene.scale.multiplyScalar(1 / 100);
-							//let object = gltf.scene.children[0];
-							//object.scale.set(0.100,0.100,0.100);
-							//object.position.set(0, 0, 0);
+							var object = gltf.scene.children[0];
+							object.scale.set(0.100,0.100,0.100);
+							object.position.setFromMatrixPosition( reticle.matrix );
 							scene.add( gltf.scene );
 						}, undefined, function ( error ) {
 							console.error( error );
