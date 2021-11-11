@@ -18,6 +18,7 @@
 
 			import * as THREE from './build/three.module.js';
 			import { GLTFLoader } from './examples/jsm/loaders/GLTFLoader.js'
+			import { DRACOLoader } from './examples/jsm/loaders/DRACOLoader.js'
 			import { ARButton } from './examples/jsm/webxr/ARButton.js';
 
 			let container;
@@ -61,18 +62,30 @@
 
 				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
+				//THREE.DRACOLoader.setDecoderPath( './examples/js/libs/draco' );
+				//loader.setDRACOLoader( new THREE.DRACOLoader() );
+				
 				//loader.load('./assets/m1a1.gltf', function ( gltf ) {
 				//	scene.add( gltf.scene );
 				//}, undefined, function ( error ) {
 				//	console.error( error );
-				//} );
+				// );
 				
-				loader.load('./assets/LittlestTokyo.glb', function ( gltf ) {
-					model.scale.set(0.2,0.2,0.2);
-					scene.add( gltf.scene );
-				}, undefined, function ( error ) {
-					console.error( error );
-				} );
+				//loader.load('./assets/m1a1.gltf', function ( gltf ) {
+					//gltf.scene.traverse( function ( child ) {
+					//	if ( child.isMesh ) {
+					//		child.geometry.center(); // center here
+					//	}
+					//});
+					//gltf.scene.scale.set(0.01,0.01,0.01) // scale here
+					//gltf.scene.scale.multiplyScalar(1 / 100);
+					//let object = gltf.scene.children[0];
+					//object.scale.set(0.100,0.100,0.100);
+					//object.position.set(0, 0, 0);
+				//	scene.add( gltf.scene );
+				//}, undefined, function ( error ) {
+				//	console.error( error );
+				//} );
 
 				function onSelect() {
 
@@ -84,12 +97,21 @@
 						//mesh.scale.y = Math.random() * 2 + 1;
 						//scene.add( mesh );
 						
-						//loader.load('./assets/m1a1.gltf', function(gltf){
-						//model = gltf.scene.children[0];
-						//model.scale.set(0.5,0.5,0.5);
-						//scene.add(gltf.scene);
-						//animate();
-						//});
+						loader.load('./assets/m1a1.gltf', function ( gltf ) {
+							//gltf.scene.traverse( function ( child ) {
+							//	if ( child.isMesh ) {
+							//		child.geometry.center(); // center here
+							//	}
+							//});
+							gltf.scene.scale.set(0.1,0.1,0.1) // scale here
+							//gltf.scene.scale.multiplyScalar(1 / 100);
+							//let object = gltf.scene.children[0];
+							//object.scale.set(0.100,0.100,0.100);
+							//object.position.set(0, 0, 0);
+							scene.add( gltf.scene );
+						}, undefined, function ( error ) {
+							console.error( error );
+						} );
 						
 						//loader.load('./assets/LittlestTokyo.glb', function ( gltf ) {
 						//	model.scale.set(0.2,0.2,0.2);
