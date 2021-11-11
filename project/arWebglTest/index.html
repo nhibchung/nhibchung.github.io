@@ -107,9 +107,9 @@
 							position.setFromMatrixPosition( reticle.matrix );
 							//gltf.scene.scale.multiplyScalar(1 / 100);
 							var object = gltf.scene.children[0];
-							object.scale.set(0.100,0.100,0.100);
+							//object.scale.set(0.100,0.100,0.100);
 							object.position.setFromMatrixPosition( reticle.matrix );
-							scene.add( gltf.scene );
+							scene.add( object );
 						}, undefined, function ( error ) {
 							console.error( error );
 						} );
