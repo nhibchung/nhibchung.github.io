@@ -26,6 +26,7 @@
 
 			let reticle;
 			let spawnedModel = null;
+			let hasSpawned = false;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
@@ -95,11 +96,14 @@
 						//mesh.scale.y = Math.random() * 2 + 1;
 						//scene.add( mesh );
 						
-						if ( spawnedModel !== null ) {
-							spawnedModel.position.setFromMatrixPosition( reticle.matrix );						
+						if (hasSpawned){											
+							if ( spawnedModel !== null ) {
+								spawnedModel.position.setFromMatrixPosition( reticle.matrix );
+							}
 							return;
 						}
 						
+						hasSpawned = true;
 						loader.load('./assets/Soldier.glb', function ( gltf ) {
 							var object = gltf.scene.children[0];
 							object.scale.set(0.01,0.01,0.01);
