@@ -107,7 +107,7 @@
 						loader.load('./assets/Soldier.glb', function ( gltf ) {
 							var object = gltf.scene.children[0];
 							object.scale.set(0.01,0.01,0.01);
-							object.rotation.set(0,180,0);
+							object.rotation.y = 180.0;
 							object.position.setFromMatrixPosition( reticle.matrix );
 
 							//Animation
