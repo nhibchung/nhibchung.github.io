@@ -74,20 +74,23 @@
 				//	console.error( error );
 				// );
 				
-						//loader.load('./assets/Soldier.glb', function ( gltf ) {
-						//	var object = gltf.scene.children[0];
-						//	object.scale.set(0.0100,0.0100,0.0100);
-						//	object.position.setFromMatrixPosition( reticle.matrix );
+						loader.load('./assets/Soldier.glb', function ( gltf ) {
+							var object = gltf.scene.children[0];
+							object.scale.set(0.0100,0.0100,0.0100);
+							scene.add( object );
 							
-						//	//Animations
-						//	mixer = new THREE.AnimationMixer( gltf.scene );
-						//	var action = mixer.clipAction( gltf.animations[ 0 ] );
-						//	action.play();
-							
-						//	scene.add( object );
-						//}, undefined, function ( error ) {
-						//	console.error( error );
-						//} );
+							var idleAnim = gltf.animations[1];
+
+							//Animations
+							mixer = new THREE.AnimationMixer( object );
+							var idle = mixer.clipAction( idleAnim );
+							idle.play();
+						
+						}, undefined, function ( error ) {
+							console.error( error );
+						} );
+						
+
 
 				function onSelect() {
 
