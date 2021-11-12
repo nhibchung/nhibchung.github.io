@@ -25,6 +25,7 @@
 			let controller;
 
 			let reticle;
+			let spawnedModel;
 
 			let hitTestSource = null;
 			let hitTestSourceRequested = false;
@@ -94,15 +95,22 @@
 						//mesh.scale.y = Math.random() * 2 + 1;
 						//scene.add( mesh );
 						
+						if ( spawnedModel !== null ) {
+							spawnedModel.position.setFromMatrixPosition( reticle.matrix );						
+							return;
+						}
+						
 						loader.load('./assets/Soldier.glb', function ( gltf ) {
 							var object = gltf.scene.children[0];
 							object.scale.set(0.01,0.01,0.01);
+							object.position.setFromMatrixPosition( reticle.matrix );
 
 							//Animation
 							mixer = new THREE.AnimationMixer( gltf.scene );
 							var idle = mixer.clipAction( gltf.animations[0] );
 							idle.play();							
 							
+							spawnedModel = object;
 							scene.add( object );						
 						}, undefined, function ( error ) {
 							console.error( error );
