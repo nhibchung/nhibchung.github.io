@@ -67,22 +67,7 @@
 				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
 				
-						//loader.load('./assets/Soldier.glb', function ( gltf ) {
-						//	var object = gltf.scene.children[0];
-						//	object.scale.set(0.0100,0.0100,0.0100);
-							
-							
-							//var idleAnim = gltf.animations[1];
 
-							//Animations
-						//	mixer = new THREE.AnimationMixer( gltf.scene );
-						//	var idle = mixer.clipAction( gltf.animations[1] );
-						//	idle.play();
-						//	scene.add( gltf.scene );
-						
-						//}, undefined, function ( error ) {
-						//	console.error( error );
-						//} );
 						
 
 
@@ -105,15 +90,16 @@
 						
 						hasSpawned = true;
 						loader.load('./assets/ARBooth.glb', function ( gltf ) {
-							var object = gltf.scene.children[0];
-							object.scale.set(0.01,0.01,0.01);
-							object.rotation.z = THREE.MathUtils.degToRad(180);
+							var object = gltf.scene.children;
+							//object.scale.set(0.01,0.01,0.01);
+							//object.scale.set(1,1,1);
+							//object.rotation.z = THREE.MathUtils.degToRad(180);
 							object.position.setFromMatrixPosition( reticle.matrix );
 
 							//Animation
 							mixer = new THREE.AnimationMixer( gltf.scene );
-							var idle = mixer.clipAction( gltf.animations[0] );
-							idle.play();							
+							var animation = mixer.clipAction( gltf.animations[0] );
+							animation.play();							
 							
 							spawnedModel = object;
 							scene.add( object );						
