@@ -48,6 +48,7 @@
 
 				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
 				light.position.set( 0.5, 1, 0.25 );
+				//light.position.set( 0, 0, 0 );
 				scene.add( light );
 
 				//
@@ -69,9 +70,10 @@
 				
 					//	loader.load('./assets/ARBooth.glb', function ( gltf ) {
 					//		var object = gltf.scene.children[0];
-					//		object.scale.set(0.5,0.5,0.5);
+					//		object.scale.set(0.1,0.1,0.1);
 					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
-							
+							//object.position.set(0, 0, 0);
+					//		object.position.z -= 1;
 							
 							//var idleAnim = gltf.animations[1];
 
@@ -109,9 +111,11 @@
 							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
-							object.scale.set(1.2,1.2,1.2);
+							//object.scale.set(1.2,1.2,1.2);
 							object.rotation.y = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
+							object.position.z -= 1;
+							
 
 							//Animation
 							mixer = new THREE.AnimationMixer( gltf.scene );
