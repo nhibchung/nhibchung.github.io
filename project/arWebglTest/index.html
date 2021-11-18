@@ -67,7 +67,23 @@
 				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
 				
+						loader.load('./assets/ARBooth.glb', function ( gltf ) {
+							var object = gltf.scene.children;
+							//object.scale.set(0.01,0.01,0.01);
+							//object.rotation.y = THREE.MathUtils.degToRad(180);
+							
+							
+							//var idleAnim = gltf.animations[1];
 
+							//Animations
+							mixer = new THREE.AnimationMixer( gltf.scene );
+							var animation = mixer.clipAction( gltf.animations[0] );
+							animation.play();
+							scene.add( gltf.scene );
+						
+						}, undefined, function ( error ) {
+							console.error( error );
+						} );
 						
 
 
@@ -93,6 +109,7 @@
 							var object = gltf.scene.children;
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
+							object.scale.set(0.1,0.1,0.1);
 							//object.rotation.z = THREE.MathUtils.degToRad(180);
 							object.position.setFromMatrixPosition( reticle.matrix );
 
@@ -102,7 +119,8 @@
 							animation.play();							
 							
 							spawnedModel = object;
-							scene.add( object );						
+							scene.add( object );	
+							//scene.add(gltf.scene);
 						}, undefined, function ( error ) {
 							console.error( error );
 						} );					
