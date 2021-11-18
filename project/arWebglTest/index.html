@@ -109,8 +109,8 @@
 							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
-							object.scale.set(0.1,0.1,0.1);
-							//object.rotation.z = THREE.MathUtils.degToRad(180);
+							//object.scale.set(0.1,0.1,0.1);
+							object.rotation.z = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
 
 							//Animation
