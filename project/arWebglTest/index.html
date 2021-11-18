@@ -67,23 +67,23 @@
 				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
 				
-						loader.load('./assets/ARBooth.glb', function ( gltf ) {
-							var object = gltf.scene.children;
-							//object.scale.set(0.01,0.01,0.01);
-							//object.rotation.y = THREE.MathUtils.degToRad(180);
+						//loader.load('./assets/ARBooth.glb', function ( gltf ) {
+						//	var object = gltf.scene.children[0];
+						//	object.scale.set(0.5,0.5,0.5);
+						//	//object.rotation.y = THREE.MathUtils.degToRad(-90);
 							
 							
-							//var idleAnim = gltf.animations[1];
+						//	//var idleAnim = gltf.animations[1];
 
 							//Animations
-							mixer = new THREE.AnimationMixer( gltf.scene );
-							var animation = mixer.clipAction( gltf.animations[0] );
-							animation.play();
-							scene.add( gltf.scene );
+						//	mixer = new THREE.AnimationMixer( gltf.scene );
+						//	var animation = mixer.clipAction( gltf.animations[0] );
+						//	animation.play();
+						//	scene.add( gltf.scene );
 						
-						}, undefined, function ( error ) {
-							console.error( error );
-						} );
+						//}, undefined, function ( error ) {
+						//	console.error( error );
+						//} );
 						
 
 
@@ -106,7 +106,7 @@
 						
 						hasSpawned = true;
 						loader.load('./assets/ARBooth.glb', function ( gltf ) {
-							var object = gltf.scene.children;
+							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
 							object.scale.set(0.1,0.1,0.1);
