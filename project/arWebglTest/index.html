@@ -44,11 +44,12 @@
 				//Animation
 				clock = new THREE.Clock();
 
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 20 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.001, 20 );
 
-				const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-				light.position.set( 0.5, 1, 0.25 );
-				//light.position.set( 0, 0, 0 );
+				//const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
+				const light = new THREE.HemisphereLight( 0xffffff, 0xffffcc, 1.5 );
+				//light.position.set( 0.5, 1, 0.25 );
+				light.position.set( 0, 1, 1 );
 				scene.add( light );
 
 				//
@@ -70,7 +71,7 @@
 				
 					//	loader.load('./assets/ARBooth.glb', function ( gltf ) {
 					//		var object = gltf.scene.children[0];
-					//		object.scale.set(0.1,0.1,0.1);
+					//		object.scale.set(0.8,0.8,0.8);
 					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
 							//object.position.set(0, 0, 0);
 					//		object.position.z -= 1;
@@ -111,10 +112,10 @@
 							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
-							object.scale.set(1.2,1.2,1.2);
+							object.scale.set(1.8,1.8,1.8);
 							object.rotation.y = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
-							object.position.z -= 3;
+							object.position.z -= 4;
 							
 
 							//Animation
