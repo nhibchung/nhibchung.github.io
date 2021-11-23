@@ -118,7 +118,7 @@
 						if (hasSpawned){											
 							if ( spawnedModel !== null ) {
 								spawnedModel.position.setFromMatrixPosition( reticle.matrix );
-								spawnedModel.position.z -= 10;
+								spawnedModel.position.z -= 4;
 							}
 							return;
 						}
@@ -128,11 +128,11 @@
 							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
-							//object.scale.set(1.8,1.8,1.8);
+							object.scale.set(1.8,1.8,1.8);
 							//object.material.transparent = true;
 							object.rotation.y = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
-							object.position.z -= 10;
+							object.position.z -= 4;
 							
 
 							//var objects = [];
