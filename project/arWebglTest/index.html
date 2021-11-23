@@ -59,6 +59,8 @@
 
 				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
 				renderer.outputEncoding = THREE.sRGBEncoding;
+				//renderer.physicallyCorrectLights = true;
+				//renderer.setClearColor( 0xcccccc );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.xr.enabled = true;
@@ -80,52 +82,28 @@
 				loader.setMeshoptDecoder(MeshoptDecoder);
 				
 						//loader.load('./assets/ARBooth.glb', function ( gltf ) {
-			//			loader.load('./assets/ARBoothLatestCcTc.glb', function ( gltf ) {
-					//		var object = gltf.scene.children[0];
-							//var object = gltf.scene.children;
-					//		object.scale.set(0.1,0.1,0.1);
-					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
-							//object.position.set(0, 0, 0);
-					//		object.position.z -= 10;
-					
-			//				var meshes = [];
-			//				gltf.scene.traverse((object) => {
-			//				  if (object.isMesh) meshes.push(object);
-			//				});
-					//		meshes.forEach((mesh) => {
+						loader.load('./assets/ARBoothNewTextureCcTcKnKmKe.glb', function ( gltf ) {
+							var object = gltf.scene.children[0];
 							
-					//		  mesh.scale.set(0.5,0.5,0.5);
-							  //mesh.rotation.y = THREE.MathUtils.degToRad(-90);
-							  //mesh.position.z -= 10;
-							  //scene.add(mesh);
-					//		});
-    //gltf.scene.traverse( function ( child ) {
-        //if ( child.isMesh ) {
-            //child.geometry.center();
-			//child.rotation.y = THREE.MathUtils.degToRad(-90);
-	//		child.scale.set(0.4,0.4,0.4);
-        //}
-    //});
-    //gltf.scene.rotation.y = THREE.MathUtils.degToRad(-90);
-	
-							//gltf.scene.children[0].scale.set(1,1,1);
-							//gltf.scene.children[0].rotation.y = THREE.MathUtils.degToRad(-90);
-							//gltf.scene.children[0].position.z -= 10;
-							//gltf.scene.children[1].scale.set(0.00034,0.00034,0.00034);
-							//gltf.scene.children[1].rotation.y = THREE.MathUtils.degToRad(-90);
-							//gltf.scene.children[1].position.z -= 10;
-							//gltf.scene.children[1].position.x -= 10;
+							//object.material.format = THREE.RGBAFormat;
+							//object.material.opacity = 0.5;
+							//object.material.transparent = true;
+							//object.getObjectByName( "Plane001" ).material.opacity = 0.5;
+							//object.getObjectByName( "Plane001" ).material.transparent = true;
+							
+							object.scale.set(1,1,1);
+							object.rotation.y = THREE.MathUtils.degToRad(-90);
+							object.position.z -= 10;				
 
 							//Animations
-		//					mixer = new THREE.AnimationMixer( gltf.scene );
-		//					var animation = mixer.clipAction( gltf.animations[0] );
-		//					animation.play();
-		//					scene.add( gltf.scene );
-							//scene.add( meshes );
+							mixer = new THREE.AnimationMixer( gltf.scene );
+							var animation = mixer.clipAction( gltf.animations[0] );
+							animation.play();
+							scene.add( gltf.scene );
 						
-		//				}, undefined, function ( error ) {
-		//					console.error( error );
-		//				} );					
+						}, undefined, function ( error ) {
+							console.error( error );
+						} );					
 
 				function onSelect() {
 
@@ -151,11 +129,11 @@
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
 							//object.scale.set(1.8,1.8,1.8);
-							object.material.transparent = true;
+							//object.material.transparent = true;
 							object.rotation.y = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
 							object.position.z -= 10;
-
+							
 
 							//var objects = [];
 							//gltf.scene.traverse((object) => {
