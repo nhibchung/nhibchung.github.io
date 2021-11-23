@@ -82,8 +82,8 @@
 				loader.setMeshoptDecoder(MeshoptDecoder);
 				
 						//loader.load('./assets/ARBooth.glb', function ( gltf ) {
-						loader.load('./assets/ARBoothNewTextureCcTcKnKmKe.glb', function ( gltf ) {
-							var object = gltf.scene.children[0];
+					//	loader.load('./assets/ARBoothNewTextureCcTcKnKmKe.glb', function ( gltf ) {
+					//		var object = gltf.scene.children[0];
 							
 							//object.material.format = THREE.RGBAFormat;
 							//object.material.opacity = 0.5;
@@ -91,19 +91,19 @@
 							//object.getObjectByName( "Plane001" ).material.opacity = 0.5;
 							//object.getObjectByName( "Plane001" ).material.transparent = true;
 							
-							object.scale.set(1,1,1);
-							object.rotation.y = THREE.MathUtils.degToRad(-90);
-							object.position.z -= 10;				
+					//		object.scale.set(1,1,1);
+					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
+					//		object.position.z -= 10;				
 
 							//Animations
-							mixer = new THREE.AnimationMixer( gltf.scene );
-							var animation = mixer.clipAction( gltf.animations[0] );
-							animation.play();
-							scene.add( gltf.scene );
+					//		mixer = new THREE.AnimationMixer( gltf.scene );
+					//		var animation = mixer.clipAction( gltf.animations[0] );
+					//		animation.play();
+					//		scene.add( gltf.scene );
 						
-						}, undefined, function ( error ) {
-							console.error( error );
-						} );					
+					//	}, undefined, function ( error ) {
+					//		console.error( error );
+					//	} );					
 
 				function onSelect() {
 
