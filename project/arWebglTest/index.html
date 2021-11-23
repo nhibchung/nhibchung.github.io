@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>HAVIK WebAR Cube Test</title>
+		<title>HAVIK WebAR</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<link type="text/css" rel="stylesheet" href="files/main.css">
@@ -9,8 +9,8 @@
 	<body>
 
 		<div id="info">
-			<a href="https://www.havik.us/" target="_blank" rel="noopener">HAVIK</a> WebAR Cube Test<br/><br/>
-			- Android device: click START AR button to view the experience. Note: if AR is not enabled on your phone, please download <a href="https://play.google.com/store/apps/details?id=com.google.ar.core&hl=en_US&gl=US" target="_blank" rel="noopener">Google Play Services for AR app</a><br/>
+			<a href="https://www.havik.us/" target="_blank" rel="noopener">HAVIK</a> WebAR Demo<br/><br/>
+			- Android device: click START AR button to view the experience. Note: if AR is not enabled on your phone, please download <a href="https://play.google.com/store/apps/details?id=com.google.ar.core&hl=en_US&gl=US" target="_blank" rel="noopener">Google Play Services for AR app</a> to enable AR<br/><br/>
 			- iOS device: please download <a href="https://apps.apple.com/us/app/webxr-viewer/id1295998056" target="_blank" rel="noopener">WebXR Viewer</a>  from the app store and use it to scan the QR code to view the AR experience
 		</div>
 
@@ -19,6 +19,8 @@
 			import * as THREE from './build/three.module.js';
 			import { GLTFLoader } from './examples/jsm/loaders/GLTFLoader.js'
 			import { ARButton } from './examples/jsm/webxr/ARButton.js';
+			import { KTX2Loader } from './examples/jsm/loaders/KTX2Loader.js';
+			import { MeshoptDecoder } from './examples/jsm/libs/meshopt_decoder.module.js';
 
 			let container, mixer, clock;
 			let camera, scene, renderer;
@@ -45,9 +47,10 @@
 				clock = new THREE.Clock();
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.001, 20 );
+				//camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 0.001, 1000 );
 
 				//const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
-				const light = new THREE.HemisphereLight( 0xffffff, 0xffffcc, 1.5 );
+				const light = new THREE.HemisphereLight( 0xffffff, 0xffffcc, 1.5);
 				//light.position.set( 0.5, 1, 0.25 );
 				light.position.set( 0, 1, 1 );
 				scene.add( light );
@@ -66,29 +69,62 @@
 
 				//
 
+				const ktx2Loader = new KTX2Loader()
+					.setTranscoderPath( './examples/js/libs/basis/' )
+					.detectSupport( renderer );
+
 				//const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 ).translate( 0, 0.1, 0 );
 				const loader = new GLTFLoader();
+				loader.setKTX2Loader( ktx2Loader );
+				loader.setMeshoptDecoder(MeshoptDecoder);
 				
-					//	loader.load('./assets/ARBooth.glb', function ( gltf ) {
+						//loader.load('./assets/ARBooth.glb', function ( gltf ) {
+						loader.load('./assets/ARBoothLatestCcTc.glb', function ( gltf ) {
 					//		var object = gltf.scene.children[0];
-					//		object.scale.set(0.8,0.8,0.8);
+							//var object = gltf.scene.children;
+					//		object.scale.set(0.1,0.1,0.1);
 					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
 							//object.position.set(0, 0, 0);
-					//		object.position.z -= 1;
+					//		object.position.z -= 10;
+					
+			//				var meshes = [];
+			//				gltf.scene.traverse((object) => {
+			//				  if (object.isMesh) meshes.push(object);
+			//				});
+					//		meshes.forEach((mesh) => {
 							
-							//var idleAnim = gltf.animations[1];
+					//		  mesh.scale.set(0.5,0.5,0.5);
+							  //mesh.rotation.y = THREE.MathUtils.degToRad(-90);
+							  //mesh.position.z -= 10;
+							  //scene.add(mesh);
+					//		});
+    //gltf.scene.traverse( function ( child ) {
+        //if ( child.isMesh ) {
+            //child.geometry.center();
+			//child.rotation.y = THREE.MathUtils.degToRad(-90);
+	//		child.scale.set(0.4,0.4,0.4);
+        //}
+    //});
+    //gltf.scene.rotation.y = THREE.MathUtils.degToRad(-90);
+	
+							//gltf.scene.children[0].scale.set(1,1,1);
+							//gltf.scene.children[0].rotation.y = THREE.MathUtils.degToRad(-90);
+							//gltf.scene.children[0].position.z -= 10;
+							//gltf.scene.children[1].scale.set(0.00034,0.00034,0.00034);
+							//gltf.scene.children[1].rotation.y = THREE.MathUtils.degToRad(-90);
+							//gltf.scene.children[1].position.z -= 10;
+							//gltf.scene.children[1].position.x -= 10;
 
 							//Animations
-					//		mixer = new THREE.AnimationMixer( gltf.scene );
-					//		var animation = mixer.clipAction( gltf.animations[0] );
-					//		animation.play();
-					//		scene.add( gltf.scene );
+		//					mixer = new THREE.AnimationMixer( gltf.scene );
+		//					var animation = mixer.clipAction( gltf.animations[0] );
+		//					animation.play();
+		//					scene.add( gltf.scene );
+							//scene.add( meshes );
 						
-					//	}, undefined, function ( error ) {
-					//		console.error( error );
-					//	} );
-						
-
+		//				}, undefined, function ( error ) {
+		//					console.error( error );
+		//				} );					
 
 				function onSelect() {
 
@@ -108,14 +144,14 @@
 						}
 						
 						hasSpawned = true;
-						loader.load('./assets/ARBooth.glb', function ( gltf ) {
-							var object = gltf.scene.children[0];
+						loader.load('./assets/ARBoothLatestCcTc.glb', function ( gltf ) {
+					//		var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
-							object.scale.set(1.8,1.8,1.8);
-							object.rotation.y = THREE.MathUtils.degToRad(-90);
-							object.position.setFromMatrixPosition( reticle.matrix );
-							object.position.z -= 4;
+					//		object.scale.set(1.8,1.8,1.8);
+					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
+					//		object.position.setFromMatrixPosition( reticle.matrix );
+					//		object.position.z -= 4;
 							
 
 							//Animation
