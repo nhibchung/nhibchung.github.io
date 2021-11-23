@@ -144,14 +144,20 @@
 						}
 						
 						hasSpawned = true;
-						loader.load('./assets/ARBoothLatestCcTc.glb', function ( gltf ) {
-					//		var object = gltf.scene.children[0];
+						loader.load('./assets/ARBoothLatestCcTcKn.glb', function ( gltf ) {
+							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
-					//		object.scale.set(1.8,1.8,1.8);
-					//		object.rotation.y = THREE.MathUtils.degToRad(-90);
-					//		object.position.setFromMatrixPosition( reticle.matrix );
-					//		object.position.z -= 4;
+							object.scale.set(1.8,1.8,1.8);
+							object.rotation.y = THREE.MathUtils.degToRad(-90);
+							object.position.setFromMatrixPosition( reticle.matrix );
+							object.position.z -= 4;
+
+
+							//var objects = [];
+							//gltf.scene.traverse((object) => {
+							//  if (object.isMesh) objects.push(object);
+							//});
 							
 
 							//Animation
@@ -160,7 +166,9 @@
 							animation.play();							
 							
 							spawnedModel = object;
-							scene.add( object );	
+							scene.add( object );
+							//spawnedModel = objects;
+							//scene.add(objects);							
 							//scene.add(gltf.scene);
 						}, undefined, function ( error ) {
 							console.error( error );
