@@ -46,7 +46,7 @@
 				//Animation
 				clock = new THREE.Clock();
 
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.001, 20 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.001, 50 );
 				//camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 0.001, 1000 );
 
 				//const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
@@ -140,19 +140,21 @@
 						if (hasSpawned){											
 							if ( spawnedModel !== null ) {
 								spawnedModel.position.setFromMatrixPosition( reticle.matrix );
+								spawnedModel.position.z -= 10;
 							}
 							return;
 						}
 						
 						hasSpawned = true;
-						loader.load('./assets/ARBoothLatestCcTcKn.glb', function ( gltf ) {
+						loader.load('./assets/ARBoothCcTcKnKm.glb', function ( gltf ) {
 							var object = gltf.scene.children[0];
 							//object.scale.set(0.01,0.01,0.01);
 							//object.scale.set(1,1,1);
 							//object.scale.set(1.8,1.8,1.8);
+							object.material.transparent = true;
 							object.rotation.y = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
-							object.position.z -= 20;
+							object.position.z -= 10;
 
 
 							//var objects = [];
