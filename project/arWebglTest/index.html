@@ -118,7 +118,7 @@
 						if (hasSpawned){											
 							if ( spawnedModel !== null ) {
 								spawnedModel.position.setFromMatrixPosition( reticle.matrix );
-								spawnedModel.position.z -= 2;
+								spawnedModel.position.z -= 8;
 							}
 							return;
 						}
@@ -132,7 +132,7 @@
 							//object.material.transparent = true;
 							object.rotation.y = THREE.MathUtils.degToRad(-90);
 							object.position.setFromMatrixPosition( reticle.matrix );
-							object.position.z -= 2;
+							object.position.z -= 8;
 							
 
 							//var objects = [];
