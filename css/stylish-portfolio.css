@@ -217,6 +217,28 @@ hr.small {
     background-size: cover;
     -o-background-size: cover;
 }
+.minecraftaiheader-header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 87%;
+    background: url(../img/minecraftAiWizard/minecraftaiheader.jpg) no-repeat top center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.todolistheader-header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 87%;
+    background: url(../img/todolist/todolistheader.jpg) no-repeat top center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
 /* About */
 
 .about {
