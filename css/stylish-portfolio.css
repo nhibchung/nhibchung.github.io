@@ -233,7 +233,7 @@ hr.small {
     position: relative;
     width: 100%;
     height: 87%;
-    background: url(../img/todolist/todolistheader.jpg) no-repeat top center scroll;
+    background: url(../img/todoList/todolistheader.jpg) no-repeat top center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
